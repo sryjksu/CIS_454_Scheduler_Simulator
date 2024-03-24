@@ -1,13 +1,31 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public class Scheduler {
-    private SchedulerAlgorithm SchedulerAlgorithm;
+    private ArrayList<Process> processList;
+    private SchedulerAlgorithm algorithm;
 
-    public Scheduler(List<Process> list, String algorithm) {
-        this.schedulerAlgorithm = new SchedulerAlgorithm(list, algorithm);
+    public Scheduler(ArrayList<Process> processList, String algorithmType) {
+        this.processList = processList;
+        switch (algorithmType) {
+            case "FIFO":
+                this.algorithm = new FIFOAlgorithm();
+                break;
+            case "SJF":
+                this.algorithm = new SJFAlgorithm();
+                break;
+            case "RR":
+                this.algorithm = new RRAlgorithm();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown algorithm type");
+        }
     }
 
-    public void executeAlgorithm() {
-        schedulerAlgorithm.execute();
+    public void execute() {
+        if (this.algorithm != null) {
+            this.algorithm.execute(this.processList);
+        } else {
+            System.out.println("No scheduling algorithm set");
+        }
     }
 }
