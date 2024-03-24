@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class ListProcessor {
-    List<Process>  list = new ArrayList<>();
+    List<Process> list = new ArrayList<Process>();
 
     public ListProcessor() {
     }
