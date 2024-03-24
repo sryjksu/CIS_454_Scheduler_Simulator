@@ -1,21 +1,17 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class SchedulerApp {
     private Scheduler scheduler;
-    private List<Process> processList;
+    private ArrayList<Process> processList;
 
     public SchedulerApp() {
-        this.processList = new ArrayList<>();
-    }
-
-    public void addProcess(Process process) {
-        processList.add(process);
+        ListProcessor listProcessor = new ListProcessor(); 
+        this.processList = listProcessor.GetList(); 
     }
 
     public void runScheduler(String algorithm) {
-        this.scheduler = new Scheduler(processList, algorithm);
-        this.scheduler.executeAlgorithm();
+        this.scheduler = new Scheduler(this.processList, algorithm);
+        scheduler.execute();
     }
 
 }
