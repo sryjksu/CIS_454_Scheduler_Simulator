@@ -1,13 +1,13 @@
 import java.util.List;
 
 public class Scheduler {
-    private List<Process> processList;
-    private String algorithm;
+    private SchedulerAlgorithm schedulerAlgorithm;
 
     public Scheduler(List<Process> list, String algorithm) {
-        this.processList = list;
-        this.algorithm = algorithm;
+        this.schedulerAlgorithm = new SchedulerAlgorithm(list, algorithm);
     }
 
+    public void executeAlgorithm() {
+        schedulerAlgorithm.execute();
+    }
 }
-
