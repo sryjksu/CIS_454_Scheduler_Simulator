@@ -19,15 +19,17 @@ public class ListProcessor {
             String line;
             Scanner info;
             Process process;
-            int pid, arrival;
+            int inputTime, runningTime;
+            String algorithmType;
                 
             while(input.hasNext()){
                 line = input.nextLine();
                 info = new Scanner(line);
-                pid = Integer.parseInt(info.next());
-                arrival = Integer.parseInt(info.next());
+                inputTime = Integer.parseInt(info.next());
+                runningTime = Integer.parseInt(info.next());
+                algorithmType = info.next();
                 
-                process = new Process(pid, arrival);
+                process = new Process(inputTime, runningTime, algorithmType);
                 list.add(process);
                 input.close();
             }
