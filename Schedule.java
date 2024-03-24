@@ -1,35 +1,53 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.PriorityQueue;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Represents a scheduler for process management.
+ * Represents a schedule for process management using a list of individual moves.
  */
 public class Schedule {
-    private List<Process> processList;
-    private Process currentProcess;
-    private Scheduler scheduler;
-    private int timeSlice;
-    private Statistics RunningData;
- 
+    private List<OneMove> scheduleList;
+
     /**
-     * Constructs a Schedule with the specified scheduler and time quantum.
-     * @param scheduler The scheduler algorithm to be used.
-     * @param timeSlice The time slice for round-robin scheduling.
+     * Constructs a Schedule with an empty list of moves.
      */
-    public Schedule(Scheduler scheduler, int timeSlice) {
-        this.processList = new LinkedList<>();
-        this.scheduler = scheduler;
-        this.timeSlice = timeSlice;
-        this.RunningData = new RunningData();
+    public Schedule() {
+        this.scheduleList = new ArrayList<>();
     }
 
-    // Methods to manipulate process queue, add/remove processes, etc.
+    /**
+     * Adds a move to the schedule.
+     * @param processName The name of the process.
+     * @param time The time of the move.
+     * @param moveToStatus The status to which the process is moved.
+     */
+    public void addMove(String processName, int time, String moveToStatus) {
+        scheduleList.add(new OneMove(processName, time, moveToStatus));
+    }
 
-    // Methods to handle scheduling events, such as process arrival, completion, etc.
+    /**
+     * Represents a single move containing process name, time, and status.
+     */
+    private static class OneMove {
+        private String processName;
+        private int runningTime;
+        private String moveToStatus;
 
-    // Methods to simulate the scheduler, perform scheduling decisions, context switches, etc.
+        public OneMove(String processName, int runningTime, String moveToStatus) {
+            this.processName = processName;
+            this.time = runningTime;
+            this.moveToStatus = moveToStatus;
+        }
 
-    // Methods to track and update Running data like input time, total running time, end time. This will be used to create animation.
+        public String getProcessName() {
+            return processName;
+        }
 
+        public int getTime() {
+            return runningTime;
+        }
+
+        public String getMoveToStatus() {
+            return moveToStatus;
+        }
+    }
 }
