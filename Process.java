@@ -61,7 +61,6 @@ public class Process {
         return "Process{" +
                 "inputTime=" + inputTime +
                 ", runningTime=" + runningTime +
-                ", algorithmType='" + algorithmType + '\'' +
                 '}';
     }
 }
