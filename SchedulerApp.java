@@ -10,7 +10,8 @@ public class SchedulerApp {
     }
 
     public void runScheduler(String algorithm) {
-        this.scheduler = new Scheduler(this.processList, algorithm);
+        this.scheduler = new Scheduler(algorithm);
+        this.scheduler.setProcessList(this.processList);
         scheduler.execute();
     }
 
