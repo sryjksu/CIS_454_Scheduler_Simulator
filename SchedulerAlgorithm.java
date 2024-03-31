@@ -1,17 +1,5 @@
-import java.util.*;
+interface SchedulerAlgorithm {
+    public void DoSchedule(Schedule schedule);
 
-public class SchedulerAlgorithm {
-    Schedule  schedule;
-
-    public SchedulerAlgorithm(List<Process> list) {
-
-    }
-
-    public void DoSchedule(Schedule *schedule) {
-
-    }
-
-    public void OrderInTime() {
-        
-    }
+    public void OrderInTime();
 }
