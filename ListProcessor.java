@@ -2,12 +2,13 @@ import java.util.*;
 import java.io.*;
 
 public class ListProcessor {
-    List<Process> list = new ArrayList<Process>();
+    ArrayList<Process> list = new ArrayList<Process>();
+
 
     public ListProcessor() {
     }
 
-    public List<Process> GetList() {
+    public ArrayList<Process> GetList() {
 
         return list;
     }
