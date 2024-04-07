@@ -9,6 +9,13 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.util.Duration;
+
+import javafx.event.EventHandler;
 
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
@@ -37,7 +44,6 @@ public class MainScreenController
     @FXML
     void addProcess(ActionEvent event)
     {
-        addMessage.setText("Process Added!");
         try
         {
             String processName1 = processName.getText();
@@ -49,14 +55,38 @@ public class MainScreenController
         {
             addMessage.setText("Please enter a number for Process Run Time and Process Start Time.");
         }
+        FadeTransition fade = new FadeTransition();
+        fade.setNode(addMessage);
+        fade.setDuration(Duration.millis(2000));
+        fade.setInterpolator(Interpolator.EASE_IN);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
     }
 
     @FXML
     void runSimulation(ActionEvent event) throws Exception 
     {
-        Parent root = FXMLLoader.load(getClass().getResource("Animation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Animation.fxml"));
+        Parent root = loader.load();
+        AnimationController animationController = loader.getController();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
+        
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+            @Override
+            public void handle(KeyEvent event)
+            {
+                switch(event.getCode())
+                {
+                    case SPACE:
+                        animationController.nextMS();
+                        break;
+                }
+            }
+        });
+        
         stage.setScene(scene);
         stage.show();
     }

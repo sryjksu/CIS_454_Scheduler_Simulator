@@ -8,7 +8,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CIS_454_Scheduler_Simulator.MainScreenController">
    <children>
-      <Button fx:id="buttonRunSimulation" layoutX="427.0" layoutY="503.0" mnemonicParsing="false" onAction="#runSimulation" text="Run Simulation" />
+      <Button fx:id="buttonRunSimulation" focusTraversable="false" layoutX="427.0" layoutY="503.0" mnemonicParsing="false" onAction="#runSimulation" text="Run Simulation" />
       <Label layoutX="343.0" layoutY="14.0" text="Welcome to Scheduler Simulator!">
          <font>
             <Font name="Times New Roman" size="20.0" />
@@ -19,10 +19,10 @@
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="buttonAddProcess" layoutX="859.0" layoutY="133.0" mnemonicParsing="false" onAction="#addProcess" text="Add Process" />
-      <TextField fx:id="processName" layoutX="14.0" layoutY="133.0" promptText="Process Name" />
-      <TextField fx:id="processStartTime" layoutX="181.0" layoutY="133.0" promptText="Process Start Time" />
-      <TextField fx:id="processRunTime" layoutX="347.0" layoutY="133.0" promptText="Process Run Time" />
+      <Button fx:id="buttonAddProcess" focusTraversable="false" layoutX="859.0" layoutY="133.0" mnemonicParsing="false" onAction="#addProcess" text="Add Process" />
+      <TextField fx:id="processName" focusTraversable="false" layoutX="14.0" layoutY="133.0" promptText="Process Name" />
+      <TextField fx:id="processStartTime" focusTraversable="false" layoutX="181.0" layoutY="133.0" promptText="Process Start Time" />
+      <TextField fx:id="processRunTime" focusTraversable="false" layoutX="347.0" layoutY="133.0" promptText="Process Run Time" />
       <Label fx:id="addMessage" layoutX="434.0" layoutY="165.0" />
    </children>
 </Pane>

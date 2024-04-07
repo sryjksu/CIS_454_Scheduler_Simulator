@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
@@ -15,9 +16,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import java.io.IOException;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import java.util.Random;
 
 public class AnimationController implements Initializable
 {
@@ -39,6 +41,9 @@ public class AnimationController implements Initializable
 
     @FXML
     private Circle circle5;
+    
+    @FXML
+    private Label timeLabel;
 
     @FXML
     void back(ActionEvent event) throws IOException
@@ -53,16 +58,53 @@ public class AnimationController implements Initializable
     @Override
     public void initialize(URL arg0, ResourceBundle arg1)
     {
-        TranslateTransition translateC1 = new TranslateTransition();
-        translateC1.setNode(circle1);
-        translateC1.setDuration(Duration.millis(500));
-//         translateC1.setCycleCount(TranslateTransition.INDEFINITE);
-        translateC1.setFromX(circle1.getCenterX());
-        translateC1.setFromY(circle1.getCenterY());
-        System.out.println(circle1.getCenterX());
-        translateC1.setToX(100);
-        translateC1.setToY(100);
-        translateC1.play();
+        initializecircle(circle1, 500, 150);
     }
-
+    
+    enum State {READY, RUNNING, BLOCKED};
+    Random random = new Random();
+    
+    public void anAnimation(Circle circle, State state)
+    {
+        double x = 0, y = 0;
+        switch(state)
+        {
+            case READY:
+                x = 220 + random.nextInt(130) - 65;
+                y = 373 + random.nextInt(130) - 65;
+                break;
+            case RUNNING:
+                x = 480 + random.nextInt(130) - 65;
+                y = 144 + random.nextInt(130) - 65;
+                break;
+            case BLOCKED:
+                x = 740 + random.nextInt(130) - 65;
+                y = 373 + random.nextInt(130) - 65;
+                break;
+        }
+        
+        TranslateTransition translate = new TranslateTransition();
+        translate.setNode(circle);
+        translate.setDuration(Duration.millis(400));
+        translate.setToX(x);
+        translate.setToY(y);
+        translate.play();
+        translate.play();
+    }
+    
+    int currentTime = 0;
+    
+    public void nextMS()
+    {
+        currentTime++;
+        timeLabel.setText("Time: " + currentTime + "ms");
+        // do animation according to schedule
+        anAnimation(circle1, State.READY);
+    }
+    
+    public void initializecircle(Circle circle, double x, double y)
+    {
+        circle.setVisible(true);
+        anAnimation(circle, State.BLOCKED);
+    }
 }
