@@ -3,24 +3,32 @@ import java.util.List;
 
 public class FIFOAlgorithm {
 
-    private List<Integer> queue;
-    private int capacity;
+    public static Schedule runFIFOAlgorithm(List<Process> processes) {
+        Schedule schedule = new Schedule();
+        List<Process> processList = new ArrayList<>();
 
-    public FIFOAlgorithm(int capacity) {
-        this.capacity = capacity;
-        this.queue = new ArrayList<>(capacity);
-    }
+        int currentTime = 0;
 
-    public void referencePage(int pageNumber) {
-        if (!queue.contains(pageNumber)) {
-            if (queue.size() == capacity) {
-                queue.remove(0); 
+        for (Process process : processes) {
+            // If the process arrives later, wait until its arrival time
+            while (currentTime < process.getInputTime()) {
+                currentTime++;
             }
-            queue.add(pageNumber); 
-        }
-    }
 
-    public void displayPages() {
-        System.out.println("Pages in memory: " + queue);
+            // Execute the process
+            schedule.addMove(process.getAlgorithmType(), process.getRunningTime(), process.getInputTime(), "Running");
+
+            // Update the current time
+            currentTime += process.getRunningTime();
+
+            // Add the process to the list for future execution (FIFO)
+            processList.add(process);
+        }
+
+        for (Process finishedProcess : processList) {
+            schedule.addMove(finishedProcess.getAlgorithmType(), 0, currentTime, "Finished");
+        }
+
+        return schedule;
     }
 }
