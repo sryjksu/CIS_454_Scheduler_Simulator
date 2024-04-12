@@ -43,6 +43,9 @@ public class AnimationController implements Initializable
     private Circle circle5;
     
     @FXML
+    private Label endMessage;
+    
+    @FXML
     private Label timeLabel;
 
     @FXML
@@ -58,12 +61,13 @@ public class AnimationController implements Initializable
     @Override
     public void initialize(URL arg0, ResourceBundle arg1)
     {
-        initializecircle(circle1, 500, 150);
+        initializeCircle(circle1, 500, 150);
     }
     
-    enum State {READY, RUNNING, BLOCKED};
+    enum State {READY, RUNNING, BLOCKED, FINISH};
     Random random = new Random();
     
+    // generate animation for "circle" to go to "state"
     public void anAnimation(Circle circle, State state)
     {
         double x = 0, y = 0;
@@ -81,6 +85,9 @@ public class AnimationController implements Initializable
                 x = 740 + random.nextInt(130) - 65;
                 y = 373 + random.nextInt(130) - 65;
                 break;
+            case FINISH:
+                finishCircle(circle);
+                return;
         }
         
         TranslateTransition translate = new TranslateTransition();
@@ -94,17 +101,34 @@ public class AnimationController implements Initializable
     
     int currentTime = 0;
     
-    public void nextMS()
+    // handle all actions within one ms
+    protected void nextMS()
     {
         currentTime++;
         timeLabel.setText("Time: " + currentTime + "ms");
         // do animation according to schedule
+        // pseudo code
+        // do while (next != null)
+        //  while (next time == current time)
+        //      anAnimation(current circle, current state)
+        //      current = next
+        //  current time++
+        // finish all circle, display end message
         anAnimation(circle1, State.READY);
     }
     
-    public void initializecircle(Circle circle, double x, double y)
+    // show circle and initialize position
+    private void initializeCircle(Circle circle, double x, double y)
     {
         circle.setVisible(true);
         anAnimation(circle, State.BLOCKED);
+    }
+    
+    // clear circle after process is finished
+    public void finishCircle(Circle circle)
+    {
+        circle.setVisible(false);
+        circle.setTranslateX(0);
+        circle.setTranslateY(0);
     }
 }

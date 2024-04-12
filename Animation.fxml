@@ -42,5 +42,10 @@
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Label>
+      <Label fx:id="endMessage" layoutX="96.0" layoutY="215.0" text="All process finished, simulation ended" textFill="#007129" visible="false">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
