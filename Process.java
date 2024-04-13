@@ -5,7 +5,7 @@
 public class Process {
     private int inputTime; // Input time of the process
     private int runningTime; // Running time of the process
-    
+    private String algorithmType;
 
     /**
      * Constructs a new Process with specified input time, running time, and algorithm type.
@@ -15,6 +15,7 @@ public class Process {
     public Process(int inputTime, int runningTime, String algorithmType) {
         this.inputTime = inputTime;
         this.runningTime = runningTime;
+        this.algorithmType = algorithmType;
     }
 
     // Getters and setters
@@ -51,6 +52,9 @@ public class Process {
         this.runningTime = runningTime;
     }
 
+    public String getAlgorithmType() {
+        return algorithmType;
+    }
 
     /**
      * Returns the string representation of the process.
