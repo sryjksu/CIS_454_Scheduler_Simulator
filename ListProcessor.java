@@ -23,13 +23,17 @@ public class ListProcessor {
             int inputTime, runningTime;
             String algorithmType;
                 
+            // runs while loop on all lines in the file
             while(input.hasNext()){
+                // takes the first line
                 line = input.nextLine();
                 info = new Scanner(line);
+                // parses the line with spaces as delimiters
                 inputTime = Integer.parseInt(info.next());
                 runningTime = Integer.parseInt(info.next());
                 algorithmType = info.next();
                 
+                // creates a process with inputtime, runningtime, and algorithmtype as parameters
                 process = new Process(inputTime, runningTime, algorithmType);
                 list.add(process);
                 input.close();
