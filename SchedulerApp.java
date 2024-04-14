@@ -7,9 +7,9 @@ public class SchedulerApp {
 
     public SchedulerApp() {
         ListProcessor listProcessor = new ListProcessor();
-        listProcessor.createList("processes.txt");  
+        listProcessor.createList("processes.txt"); 
         this.processList = listProcessor.GetList();
-        this.scheduler = new Scheduler(processList); 
+        this.scheduler = new Scheduler(processList);
     }
 
     public void runScheduler() {
@@ -19,5 +19,9 @@ public class SchedulerApp {
             System.out.println("No processes to schedule.");
         }
     }
-}
 
+    public static void main(String[] args) {
+        SchedulerApp schedulerApp = new SchedulerApp();
+        schedulerApp.runScheduler(); 
+    }
+}
