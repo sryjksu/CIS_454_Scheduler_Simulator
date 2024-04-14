@@ -2,10 +2,11 @@ import java.util.*;
 import java.io.*;
 
 public class ListProcessor {
-    ArrayList<Process> list = new ArrayList<Process>();
-
-
+    private ArrayList<Process> list;
+    
     public ListProcessor() {
+        ArrayList<Process> list = new ArrayList<Process>();
+        this.list = list;
     }
 
     public ArrayList<Process> GetList() {
@@ -33,7 +34,7 @@ public class ListProcessor {
                 inputTime = Integer.parseInt(info.next());
                 runningTime = Integer.parseInt(info.next());
                 
-                // creates a process with inputtime, runningtime, and algorithmtype as parameters
+                // creates a process with name, inputTime, runningTime as parameters
                 process = new Process(processName, inputTime, runningTime);
                 list.add(process);
             }
