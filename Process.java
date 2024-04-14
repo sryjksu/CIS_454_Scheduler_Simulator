@@ -3,22 +3,39 @@
  * Each process contains input time, running time, and preferred algorithm.
  */
 public class Process {
+    private String name;
     private int inputTime; // Input time of the process
     private int runningTime; // Running time of the process
-    private String algorithmType;
 
     /**
      * Constructs a new Process with specified input time, running time, and algorithm type.
      * @param inputTime The input time of the process.
      * @param runningTime The running time of the process.
      */
-    public Process(int inputTime, int runningTime, String algorithmType) {
+    public Process(String name, int inputTime, int runningTime, String algorithmType) {
+        this.name = name;
         this.inputTime = inputTime;
         this.runningTime = runningTime;
         this.algorithmType = algorithmType;
     }
 
     // Getters and setters
+
+    /**
+     * Gets the name of the process.
+     * @return The name of the process.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the name of the process.
+     * @param name The name of the process to set.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      * Gets the input time of the process.
@@ -52,10 +69,7 @@ public class Process {
         this.runningTime = runningTime;
     }
 
-    public String getAlgorithmType() {
-        return algorithmType;
-    }
-
+    
     /**
      * Returns the string representation of the process.
      * @return String representation of the process.
@@ -63,8 +77,10 @@ public class Process {
     @Override
     public String toString() {
         return "Process{" +
+                "name=" + name + '\'' +
                 "inputTime=" + inputTime +
                 ", runningTime=" + runningTime +
+                ", algorithmType='" + algorithmType + '\'' +
                 '}';
     }
 }
