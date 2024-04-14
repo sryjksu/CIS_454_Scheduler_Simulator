@@ -44,15 +44,17 @@ public class Schedule {
 
     public OneMove getCurrentMove() {
         if (currentIndex >= 0 && currentIndex < scheduleList.size()) {
-            return scheduleList.get(currentIndex);
+            OneMove currentMove = scheduleList.get(currentIndex);
+            return new OneMove(currentMove.processName, currentMove.runningTime, currentMove.moveToStatus);
         }
         return null;
     }
 
     public OneMove getNextMove() {
-        currentIndex++;
-        if (currentIndex >= 0 && currentIndex < scheduleList.size()) {
-            return scheduleList.get(currentIndex);
+        int nextIndex = currentIndex + 1;
+        if (nextIndex >= 0 && nextIndex < scheduleList.size()) {
+            OneMove nextMove = scheduleList.get(nextIndex);
+            return new OneMove(nextMove.processName, nextMove.runningTime, nextMove.moveToStatus);
         }
         return null;
     }
