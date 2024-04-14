@@ -1,5 +1,10 @@
-interface SchedulerAlgorithm {
-    public void DoSchedule(Schedule schedule);
+public abstract class SchedulerAlgorithm {
 
-    public void OrderInTime();
+    public void DoSchedule(Schedule schedule){
+
+    }
+
+    public void OrderInTime() {
+
+    }
 }
