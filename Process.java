@@ -12,7 +12,7 @@ public class Process {
      * @param inputTime The input time of the process.
      * @param runningTime The running time of the process.
      */
-    public Process(String name, int inputTime, int runningTime, String algorithmType) {
+    public Process(String name, int inputTime, int runningTime) {
         this.name = name;
         this.inputTime = inputTime;
         this.runningTime = runningTime;
