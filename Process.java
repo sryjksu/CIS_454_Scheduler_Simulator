@@ -79,7 +79,6 @@ public class Process {
                 "name=" + name + '\'' +
                 "inputTime=" + inputTime +
                 ", runningTime=" + runningTime +
-                ", algorithmType='" + algorithmType + '\'' +
                 '}';
     }
 }
