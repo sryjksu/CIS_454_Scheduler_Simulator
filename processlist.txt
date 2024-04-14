@@ -1,5 +1,5 @@
-inputTime runningTime algorithmType
-0 50 FIFO
-10 30 FIFO
-40 60 FIFO
-100 20 FIFO
+processName inputTime runningTime
+proc1 0 50
+proc2 10 30
+proc3 40 60
+proc4 100 20

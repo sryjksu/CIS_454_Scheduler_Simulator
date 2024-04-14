@@ -21,7 +21,7 @@ public class ListProcessor {
             Scanner info;
             Process process;
             int inputTime, runningTime;
-            String algorithmType;
+            String processName;
                 
             // runs while loop on all lines in the file
             while(input.hasNext()){
@@ -29,15 +29,15 @@ public class ListProcessor {
                 line = input.nextLine();
                 info = new Scanner(line);
                 // parses the line with spaces as delimiters
+                processName = info.next();
                 inputTime = Integer.parseInt(info.next());
                 runningTime = Integer.parseInt(info.next());
-                algorithmType = info.next();
                 
                 // creates a process with inputtime, runningtime, and algorithmtype as parameters
-                process = new Process(inputTime, runningTime, algorithmType);
+                process = new Process(processName, inputTime, runningTime);
                 list.add(process);
-                input.close();
             }
+            input.close();
         }
 
         catch (FileNotFoundException e) {
