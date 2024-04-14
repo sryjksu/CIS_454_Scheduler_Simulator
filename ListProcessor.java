@@ -3,10 +3,10 @@ import java.io.*;
 
 public class ListProcessor {
     private ArrayList<Process> list;
+    private String fileName;
     
     public ListProcessor() {
-        ArrayList<Process> list = new ArrayList<Process>();
-        this.list = list;
+        list = new ArrayList<Process>();
     }
 
     public ArrayList<Process> GetList() {
@@ -16,6 +16,7 @@ public class ListProcessor {
 
     public void createList(String file) {
         try {
+            fileName = file;
             FileInputStream fstream = new FileInputStream(file);
             Scanner input = new Scanner(fstream);
             String line;
