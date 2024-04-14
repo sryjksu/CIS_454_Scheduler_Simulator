@@ -16,7 +16,6 @@ public class Process {
         this.name = name;
         this.inputTime = inputTime;
         this.runningTime = runningTime;
-        this.algorithmType = algorithmType;
     }
 
     // Getters and setters
