@@ -67,18 +67,4 @@ public class Process {
     public void setRunningTime(int runningTime) {
         this.runningTime = runningTime;
     }
-
-    
-    /**
-     * Returns the string representation of the process.
-     * @return String representation of the process.
-     */
-    @Override
-    public String toString() {
-        return "Process{" +
-                "name=" + name + '\'' +
-                "inputTime=" + inputTime +
-                ", runningTime=" + runningTime +
-                '}';
-    }
 }
