@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Scheduler {
     private ArrayList<Process> processList;
+    
     private SchedulerAlgorithm algorithm;
 
     public Scheduler(ArrayList<Process> processList, String algorithmType) {
