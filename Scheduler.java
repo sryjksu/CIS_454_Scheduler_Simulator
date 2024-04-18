@@ -22,11 +22,12 @@ public class Scheduler {
         }
     }
 
-    public void execute() {
+    public Schedule execute() {
         if (this.algorithm != null) {
-            this.algorithm.execute(this.processList);
+            return this.algorithm.execute(this.processList);
         } else {
-            System.out.println("No scheduling algorithm set");
+            System.out.println("No scheduling algorithm set.");
+            return null;
         }
     }
 }
