@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import java.io.FileWriter;
+
 public class MainScreenController implements Initializable
 {
 
@@ -68,10 +70,17 @@ public class MainScreenController implements Initializable
             processRunTimeList.add(processRunTime1);
             processStartTimeList.add(processStartTime1);
             addMessage.setText("Process Added!");
+            fileWriter.write(processName1 + " " + processRunTime1 + " " + processStartTime1 + "\n");
+            processName.setText("");
+            processRunTime.setText("");
+            processStartTime.setText("");
         }
         catch (NumberFormatException e)
         {
             addMessage.setText("Please enter a number for Process Run Time and Process Start Time.");
+        }
+        catch (IOException e)
+        {
         }
         FadeTransition fade = new FadeTransition();
         fade.setNode(addMessage);
@@ -88,7 +97,8 @@ public class MainScreenController implements Initializable
         String algorithmChosen = algorithm.getValue();
         createProcessList();
         // call scheduler here
-        
+        fileWriter.flush();
+        fileWriter.close();
         // load animation scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Animation.fxml"));
         Parent root = loader.load();
@@ -116,11 +126,20 @@ public class MainScreenController implements Initializable
     }
     
     private String[] algorithms = {"FIFO", "SJF", "RR"};
+    FileWriter fileWriter;
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1)
     {
         algorithm.getItems().addAll(algorithms);
+        try
+        {
+            fileWriter = new FileWriter("./CIS_454_Scheduler_Simulator/Process List.txt", false);
+        }
+        catch (IOException e)
+        {
+            System.out.println("Failed to create FileWriter.");
+        }
     }
     
     private void createProcessList()
