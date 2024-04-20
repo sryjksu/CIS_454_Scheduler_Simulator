@@ -66,7 +66,7 @@ public class Schedule {
     /**
      * Represents a single move containing process name, time, and status.
      */
-    private static class OneMove {
+    private class OneMove {
         private String processName;
         private int runningTime;
         private status moveToStatus;
