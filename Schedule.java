@@ -27,6 +27,42 @@ public class Schedule {
         scheduleList.add(new OneMove(processName, runningTime, moveToStatus));
     }
 
+    public String getCurrentName() {
+        if (currentIndex < scheduleList.size()) {
+            return scheduleList.get(currentIndex).processName;
+        } else {
+            return null; // Handle index out of bounds
+        }
+    }
+
+    public int getCurrentTime() {
+        if (currentIndex < scheduleList.size()) {
+            return scheduleList.get(currentIndex).runningTime;
+        } else {
+            return -1; // Handle index out of bounds
+        }
+    }
+
+    public status getCurrentStatus() {
+        if (currentIndex < scheduleList.size()) {
+            return scheduleList.get(currentIndex).moveToStatus;
+        } else {
+            return null; // Handle index out of bounds
+        }
+    }
+
+    public void moveToNext() {
+        currentIndex++;
+    }
+
+    public int getNextTime() {
+        if (currentIndex + 1 < scheduleList.size()) {
+            return scheduleList.get(currentIndex + 1).runningTime;
+        } else {
+            return -1; // Handle index out of bounds
+        }
+    }
+
     /**
      * Represents a single move containing process name, time, and status.
      */
@@ -40,47 +76,6 @@ public class Schedule {
             this.runningTime = runningTime;
             this.moveToStatus = moveToStatus;
         }
-    }
-
-    public OneMove getCurrentMove() {
-        if (currentIndex >= 0 && currentIndex < scheduleList.size()) {
-            OneMove currentMove = scheduleList.get(currentIndex);
-            return new OneMove(currentMove.processName, currentMove.runningTime, currentMove.moveToStatus);
-        }
-        return null;
-    }
-
-    public OneMove getNextMove() {
-        int nextIndex = currentIndex + 1;
-        if (nextIndex >= 0 && nextIndex < scheduleList.size()) {
-            OneMove nextMove = scheduleList.get(nextIndex);
-            return new OneMove(nextMove.processName, nextMove.runningTime, nextMove.moveToStatus);
-        }
-        return null;
-    }
-
-    public String getProcessName() {
-        OneMove currentMove = getCurrentMove();
-        if (currentMove != null) {
-            return currentMove.processName;
-        }
-        return null;
-    }
-
-    public int getRunningTime() {
-        OneMove currentMove = getCurrentMove();
-        if (currentMove != null) {
-            return currentMove.runningTime;
-        }
-        return -1;
-    }
-
-    public status getMoveToStatus() {
-        OneMove currentMove = getCurrentMove();
-        if (currentMove != null) {
-            return currentMove.moveToStatus;
-        }
-        return null;
     }
 }
 
