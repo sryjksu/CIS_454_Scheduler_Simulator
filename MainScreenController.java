@@ -98,7 +98,6 @@ public class MainScreenController implements Initializable
     {
         String algorithmChosen = algorithm.getValue();
         System.out.println("Chosed algorithm: " + algorithmChosen);
-        createProcessList();
         // call scheduler here
         fileWriter.flush();
         fileWriter.close();
@@ -154,10 +153,5 @@ public class MainScreenController implements Initializable
         schedule.addMove("P1", 5, Schedule.State.FINISHED);
         schedule.addMove("P3", 5, Schedule.State.RUNNING);
         schedule.addMove("P3", 7, Schedule.State.FINISHED);
-    }
-    
-    private void createProcessList()
-    {
-        return;
     }
 }

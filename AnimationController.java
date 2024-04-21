@@ -71,7 +71,7 @@ public class AnimationController implements Initializable
     Random random = new Random();
     
     // generate animation for "circle" to go to "state"
-    public void anAnimation(Circle circle, Schedule.State state)
+    private void anAnimation(Circle circle, Schedule.State state)
     {
         double x = 0, y = 0;
         switch (state)
