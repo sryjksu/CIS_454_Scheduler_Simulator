@@ -91,10 +91,13 @@ public class MainScreenController implements Initializable
         fade.play();
     }
     
+    protected static Schedule schedule;
+    
     @FXML
     void runSimulation(ActionEvent event) throws Exception 
     {
         String algorithmChosen = algorithm.getValue();
+        System.out.println("Chosed algorithm: " + algorithmChosen);
         createProcessList();
         // call scheduler here
         fileWriter.flush();
@@ -140,6 +143,17 @@ public class MainScreenController implements Initializable
         {
             System.out.println("Failed to create FileWriter.");
         }
+        
+        //fake a schedule
+        schedule = new Schedule();
+        schedule.addMove("P2", 1, Schedule.State.RUNNING);
+        schedule.addMove("P1", 2, Schedule.State.READY);
+        schedule.addMove("P2", 4, Schedule.State.FINISHED);
+        schedule.addMove("P3", 4, Schedule.State.READY);
+        schedule.addMove("P1", 4, Schedule.State.RUNNING);
+        schedule.addMove("P1", 5, Schedule.State.FINISHED);
+        schedule.addMove("P3", 5, Schedule.State.RUNNING);
+        schedule.addMove("P3", 7, Schedule.State.FINISHED);
     }
     
     private void createProcessList()

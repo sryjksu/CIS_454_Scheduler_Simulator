@@ -1,3 +1,5 @@
+package CIS_454_Scheduler_Simulator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +17,15 @@ public class Schedule {
         this.scheduleList = new ArrayList<OneMove>();
         this.currentIndex = 0;
     }
-    public enum status {READY, RUNNING, BLOCKED, FINISHED};
+    public enum State {READY, RUNNING, BLOCKED, FINISHED};
 
     /**
      * Adds a move to the schedule.
      * @param processName The name of the process.
      * @param runningTime The time of the move.
-     * @param moveToStatus The status to which the process is moved.
+     * @param moveToStatus The State to which the process is moved.
      */
-    public void addMove(String processName, int runningTime, status moveToStatus) {
+    public void addMove(String processName, int runningTime, State moveToStatus) {
         scheduleList.add(new OneMove(processName, runningTime, moveToStatus));
     }
 
@@ -43,7 +45,7 @@ public class Schedule {
         }
     }
 
-    public status getCurrentStatus() {
+    public State getCurrentStatus() {
         if (currentIndex < scheduleList.size()) {
             return scheduleList.get(currentIndex).moveToStatus;
         } else {
@@ -64,14 +66,14 @@ public class Schedule {
     }
 
     /**
-     * Represents a single move containing process name, time, and status.
+     * Represents a single move containing process name, time, and State.
      */
     private class OneMove {
         private String processName;
         private int runningTime;
-        private status moveToStatus;
+        private State moveToStatus;
         
-        private OneMove(String processName, int runningTime, status moveToStatus) {
+        private OneMove(String processName, int runningTime, State moveToStatus) {
             this.processName = processName;
             this.runningTime = runningTime;
             this.moveToStatus = moveToStatus;

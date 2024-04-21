@@ -17,7 +17,7 @@ import javafx.fxml.Initializable;
 import java.io.IOException;
 
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import java.util.Random;
 
@@ -61,17 +61,20 @@ public class AnimationController implements Initializable
     @Override
     public void initialize(URL arg0, ResourceBundle arg1)
     {
-        initializeCircle(circle1, 500, 150);
+        circles[0] = circle1;
+        circles[1] = circle2;
+        circles[2] = circle3;
+        circles[3] = circle4;
+        circles[4] = circle5;
     }
     
-    enum State {READY, RUNNING, BLOCKED, FINISH};
     Random random = new Random();
     
     // generate animation for "circle" to go to "state"
-    public void anAnimation(Circle circle, State state)
+    public void anAnimation(Circle circle, Schedule.State state)
     {
         double x = 0, y = 0;
-        switch(state)
+        switch (state)
         {
             case READY:
                 x = 220 + random.nextInt(130) - 65;
@@ -85,7 +88,7 @@ public class AnimationController implements Initializable
                 x = 740 + random.nextInt(130) - 65;
                 y = 373 + random.nextInt(130) - 65;
                 break;
-            case FINISH:
+            case FINISHED:
                 finishCircle(circle);
                 return;
         }
@@ -99,36 +102,92 @@ public class AnimationController implements Initializable
         translate.play();
     }
     
-    int currentTime = 0;
+    int currentTime = -1;
+    String processName;
+    int timeOfMove;
+    Schedule.State moveToState;
+    boolean finish = false;
     
     // handle all actions within one ms
+    Schedule schedule = MainScreenController.schedule;
+    
     protected void nextMS()
     {
+        if (finish)
+        {
+            return;
+        }
         currentTime++;
         timeLabel.setText("Time: " + currentTime + "ms");
-        // do animation according to schedule
-        // pseudo code
-        // do while (next != null)
-        //  while (next time == current time)
-        //      anAnimation(current circle, current state)
-        //      current = next
-        //  current time++
-        // finish all circle, display end message
-        anAnimation(circle1, State.READY);
+        while (true)
+        {
+            timeOfMove = schedule.getCurrentTime();
+            if (timeOfMove == currentTime)
+            {
+                Circle circle;
+                processName = schedule.getCurrentName();
+                moveToState = schedule.getCurrentStatus();
+                circle = nameToCircle(processName);
+                anAnimation(circle, moveToState);
+                if (schedule.getNextTime() == currentTime)
+                {
+                    schedule.moveToNext();
+                    continue;
+                }
+                if (schedule.getNextTime() == -1)
+                {
+                    finishAnimation();
+                    finish = true;
+                    break;
+                }
+                else if (schedule.getNextTime() != currentTime)
+                {
+                    schedule.moveToNext();
+                    break;
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
     }
     
-    // show circle and initialize position
-    private void initializeCircle(Circle circle, double x, double y)
+    // show circle
+    private void initializeCircle(Circle circle)
     {
         circle.setVisible(true);
-        anAnimation(circle, State.BLOCKED);
     }
     
     // clear circle after process is finished
-    public void finishCircle(Circle circle)
+    private void finishCircle(Circle circle)
     {
         circle.setVisible(false);
         circle.setTranslateX(0);
         circle.setTranslateY(0);
+    }
+    
+    // animation for end of all animation
+    private void finishAnimation()
+    {
+        endMessage.setVisible(true);
+    }
+    
+    // translate process name into circle
+    Dictionary<String, Circle> circleName= new Hashtable<>();
+    Circle[] circles = new Circle[5];
+    int circleUsed = 0;
+    
+    private Circle nameToCircle(String name)
+    {
+        Circle circle;
+        if ((circle = circleName.get(name)) == null)
+        {
+            circleName.put(name, circles[circleUsed]);
+            circle = circleName.get(name);
+            initializeCircle(circle);
+            circleUsed++;
+        }
+        return circle;
     }
 }
