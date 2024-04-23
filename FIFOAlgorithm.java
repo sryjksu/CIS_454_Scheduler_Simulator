@@ -5,62 +5,70 @@ import java.util.List;
 public class FIFOAlgorithm {
     private List<Process> inputProcesses;
     private List<Process> readyList;
-    private List<Process> runningList;
     private List<Process> finishedList;
     private Schedule outputSchedule;
     private int currentTime;
+    private List<Process> readyProcesses;
 
     public FIFOAlgorithm(List<Process> inputProcesses) {
         this.inputProcesses = inputProcesses;
         this.readyList = new ArrayList<>();
-        this.runningList = new ArrayList<>();
+
         this.finishedList = new ArrayList<>();
         this.outputSchedule = new Schedule();
+        this.readyProcesses = new ArrayList<>();
         this.currentTime = 0;
     }
 
     public Schedule runScheduler() {
-        Process currentProcess = null; // Pointer to the currently running process
+        Process runningProcess = null; // Pointer to the currently running process
         
-        while (!finishedList.containsAll(inputProcesses)) {
+        while (!inputProcesses.isEmpty() || !finishedList.containsAll(readyProcesses)) {
             // Check for processes with input time less than or equal to current time
             for (Process process : inputProcesses) {
-                if (process.getInputTime() <= currentTime && !readyList.contains(process)) {
-                    readyList.add(process);
+                if (process.getInputTime() <= currentTime) {
+                    readyProcesses.add(process);
                     outputSchedule.addMove(process.getName(), currentTime, Schedule.State.READY);
-                    System.out.println("123");
                 }
+            }
+            
+            // Move ready processes to the ready list and remove them from input list
+            for (Process process : readyProcesses) {
+                readyList.add(process);
+                inputProcesses.remove(process);
             }
     
             // If no process is running and there are processes ready, start the next process
-            if (currentProcess == null && !readyList.isEmpty()) {
-                currentProcess = readyList.remove(0);
-                outputSchedule.addMove(currentProcess.getName(), currentTime, Schedule.State.RUNNING);
-                System.out.println("234");
-            }
-    
-            // Decrement running time of the currently running process
-            // If a process is currently running
-            if (currentProcess != null) {
-                // If the running time is zero, move the process to the finished list
-                if (currentProcess.getRunningTime() == 0) {
-                    finishedList.add(currentProcess);
-                    outputSchedule.addMove(currentProcess.getName(), currentTime, Schedule.State.FINISHED);
-                    currentProcess = null; // Reset the pointer to indicate no process is running
-                    System.out.println("456");
-                } else {
-                // If the running time is not zero, decrement it by one
-                    currentProcess.setRunningTime(currentProcess.getRunningTime() - 1);
-                    outputSchedule.addMove(currentProcess.getName(), currentTime, Schedule.State.RUNNING);
-                    System.out.println("345");
+            if (runningProcess == null && !readyList.isEmpty()) {
+                Process nextProcess = readyList.remove(0);
+            // Check if the next process has already finished
+                if (!finishedList.contains(nextProcess)) {
+                    runningProcess = nextProcess;
                 }
             }
 
     
+            // Decrement running time of the currently running process
+            // If a process is currently running
+            if (runningProcess != null) {
+                // If the running time is zero, move the process to the finished list
+                if (runningProcess.getRunningTime() == 0) {
+                    finishedList.add(runningProcess);
+                    outputSchedule.addMove(runningProcess.getName(), currentTime, Schedule.State.FINISHED);
+                    runningProcess = null; // Reset the pointer to indicate no process is running
+                    readyList.remove(runningProcess);
+                } else {
+                    // If the running time is not zero, decrement it by one
+                    runningProcess.setRunningTime(runningProcess.getRunningTime() - 1);
+                    outputSchedule.addMove(runningProcess.getName(), currentTime, Schedule.State.RUNNING);
+
+                }
+            }
+
             // Increment current time
             currentTime++;
         }
-    
+        
         return outputSchedule;
     }
     
