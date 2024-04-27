@@ -1,4 +1,5 @@
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,19 +34,14 @@ public class FIFOAlgorithm {
             }
             
             // Move ready processes to the ready list and remove them from input list
-            for (Process process : readyProcesses) {
+            for (Process process : readyProcesses ) {
+                if (!readyList.contains(process)){
                 readyList.add(process);
                 inputProcesses.remove(process);
-            }
-    
-            // If no process is running and there are processes ready, start the next process
-            if (runningProcess == null && !readyList.isEmpty()) {
-                Process nextProcess = readyList.remove(0);
-            // Check if the next process has already finished
-                if (!finishedList.contains(nextProcess)) {
-                    runningProcess = nextProcess;
                 }
             }
+            
+           
 
     
             // Decrement running time of the currently running process
@@ -54,14 +50,28 @@ public class FIFOAlgorithm {
                 // If the running time is zero, move the process to the finished list
                 if (runningProcess.getRunningTime() == 0) {
                     finishedList.add(runningProcess);
-                    outputSchedule.addMove(runningProcess.getName(), currentTime, Schedule.State.FINISHED);
-                    runningProcess = null; // Reset the pointer to indicate no process is running
+                    outputSchedule.addMove(runningProcess.getName(), currentTime , Schedule.State.FINISHED);
                     readyList.remove(runningProcess);
+                    Process nextToRun = readyList.get(0);
+                    runningProcess = nextToRun; // Reset the pointer to indicate no process is running
+                    runningProcess.setRunningTime(runningProcess.getRunningTime() - 1);
+                    if (!finishedList.contains(runningProcess)){
+                        outputSchedule.addMove(runningProcess.getName(), currentTime , Schedule.State.RUNNING);
+                    }
                 } else {
                     // If the running time is not zero, decrement it by one
                     runningProcess.setRunningTime(runningProcess.getRunningTime() - 1);
-                    outputSchedule.addMove(runningProcess.getName(), currentTime, Schedule.State.RUNNING);
 
+                }
+            }
+
+
+            // If no process is running and there are processes ready, start the next process
+            if (runningProcess == null && !readyList.isEmpty()) {
+                Process nextProcess = readyList.get(0);
+                runningProcess = nextProcess;
+                if (!finishedList.contains(runningProcess)){
+                    outputSchedule.addMove(runningProcess.getName(), currentTime, Schedule.State.RUNNING);
                 }
             }
 
@@ -73,3 +83,4 @@ public class FIFOAlgorithm {
     }
     
 }
+
