@@ -21,7 +21,7 @@ public class FIFOAlgorithm {
         this.currentTime = 0;
     }
 
-    public Schedule runScheduler() {
+    public Schedule makeSchedule() {
         Process runningProcess = null; // Pointer to the currently running process
         
         while (!inputProcesses.isEmpty() || !finishedList.containsAll(readyProcesses)) {
