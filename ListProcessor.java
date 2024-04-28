@@ -47,14 +47,4 @@ public class ListProcessor {
         }
 
     }
-
-    public static void main(String[] args) {
-        ListProcessor listProcessor = new ListProcessor();
-        listProcessor.createList("Process List.txt");
-        ArrayList<Process> list = listProcessor.GetList();
-        System.out.println("List of processes:");
-        for (Process process : list) {
-            System.out.println(process.getName() + " " + process.getInputTime() + " " + process.getRunningTime());
-        }
-    }
 }
