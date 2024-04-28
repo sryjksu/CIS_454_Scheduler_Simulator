@@ -3,7 +3,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class FIFOAlgorithm {
+public class FIFOAlgorithm extends SchedulerAlgorithm{
     private List<Process> inputProcesses;
     private List<Process> readyList;
     private List<Process> finishedList;
@@ -21,7 +21,8 @@ public class FIFOAlgorithm {
         this.currentTime = 0;
     }
 
-    public Schedule makeSchedule() {
+    @Override
+    public Schedule DoSchedule() {
         Process runningProcess = null; // Pointer to the currently running process
         
         while (!inputProcesses.isEmpty() || !finishedList.containsAll(readyProcesses)) {
@@ -81,6 +82,10 @@ public class FIFOAlgorithm {
         
         return outputSchedule;
     }
-    
+
+    @Override
+    public void OrderInTime() {
+        throw new Notneed("No need to have this function in FIFO");
+    }
 }
 
