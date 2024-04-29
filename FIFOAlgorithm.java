@@ -82,10 +82,5 @@ public class FIFOAlgorithm extends SchedulerAlgorithm{
         
         return outputSchedule;
     }
-
-    @Override
-    public void OrderInTime() {
-        throw new Notneed("No need to have this function in FIFO");
-    }
 }
 
