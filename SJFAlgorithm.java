@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SJFAlgorithm {
+public class SJFAlgorithm extends SchedulerAlgorithm{
     private List<Process> inputProcesses;
     private List<Process> readyList;
     private List<Process> finishedList;
