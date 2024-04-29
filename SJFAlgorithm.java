@@ -19,7 +19,8 @@ public class SJFAlgorithm extends SchedulerAlgorithm{
         this.readyProcesses = new ArrayList<>();
         this.currentTime = 0;
     }
-    public Schedule runScheduler() {
+    @Override 
+    public Schedule DoScheduler() {
         return null;
     }
 }
