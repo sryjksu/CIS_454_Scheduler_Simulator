@@ -145,13 +145,20 @@ public class MainScreenController implements Initializable
         
         //fake a schedule
         schedule = new Schedule();
-        schedule.addMove("P2", 1, Schedule.State.RUNNING);
-        schedule.addMove("P1", 2, Schedule.State.READY);
-        schedule.addMove("P2", 4, Schedule.State.FINISHED);
-        schedule.addMove("P3", 4, Schedule.State.READY);
-        schedule.addMove("P1", 4, Schedule.State.RUNNING);
-        schedule.addMove("P1", 5, Schedule.State.FINISHED);
-        schedule.addMove("P3", 5, Schedule.State.RUNNING);
-        schedule.addMove("P3", 7, Schedule.State.FINISHED);
+        schedule.addMove("P1", 0, Schedule.State.READY);
+        schedule.addMove("P1", 0, Schedule.State.RUNNING);
+        schedule.addMove("P3", 1, Schedule.State.READY);
+        schedule.addMove("P1", 2, Schedule.State.BLOCKED);
+        schedule.addMove("P3", 2, Schedule.State.RUNNING);
+        schedule.addMove("P2", 4, Schedule.State.READY);
+        schedule.addMove("P3", 6, Schedule.State.FINISHED);
+        schedule.addMove("P2", 6, Schedule.State.RUNNING);
+        schedule.addMove("P2", 8, Schedule.State.BLOCKED);
+        schedule.addMove("P1", 10, Schedule.State.READY);
+        schedule.addMove("P1", 10, Schedule.State.RUNNING);
+        schedule.addMove("P2", 11, Schedule.State.READY);
+        schedule.addMove("P1", 12, Schedule.State.FINISHED);
+        schedule.addMove("P2", 12, Schedule.State.RUNNING);
+        schedule.addMove("P2", 14, Schedule.State.FINISHED);
     }
 }
