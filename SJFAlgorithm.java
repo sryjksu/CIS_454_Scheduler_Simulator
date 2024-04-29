@@ -20,7 +20,7 @@ public class SJFAlgorithm extends SchedulerAlgorithm{
         this.currentTime = 0;
     }
     @Override 
-    public Schedule DoScheduler() {
+    public Schedule DoSchedule() {
         return null;
     }
 }
